@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/js/index.js" defer> </script>
+    <script src="/static/js/main.js" defer></script>
 </head>
 <body>
     <div id="sidebar-wrapper">
@@ -52,7 +54,7 @@
                     <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
                     <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
                     <button type="submit" class="btn btn-danger">REMOVE</button>
-                    <button type="submit" class="btn btn-danger">ADD</button>
+                    <button type="submit" class="btn btn-danger btn-cart" th:value="${prod.getProduct().getId()}">ADD</button>
                 </div>
             </div>
         </div>

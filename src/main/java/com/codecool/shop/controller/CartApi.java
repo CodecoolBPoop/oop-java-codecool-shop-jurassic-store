@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart-api"})
 public class CartApi extends HttpServlet {
@@ -23,42 +25,19 @@ public class CartApi extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
-        JsonParser parser = new JsonParser();
-        String request = req.getReader().readLine();
-        JsonObject jsonReq = (JsonObject) parser.parse(request);
-        Integer id = Integer.parseInt(jsonReq.get("prodId").toString().replace("\"", ""));
-        String action = jsonReq.get("action").toString().replace("\"", "");
-
-        ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
+        String productId = req.getParameter("prodId");
+        String action = req.getParameter("action");
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        for (Product prod: productDataStore.getAll()
-             ) {
-            this.prodFound = false;
-            if(prod.getId()==id) {
-                if(!shoppingCart.getAll().isEmpty()) {
-                    shoppingCart.getAll().forEach(product -> {
-                        if (product.getProduct().equals(prod)) {
-                            if(action.equals("add")) {
-                                this.prodFound = true;
-                                product.setQuantity(product.getQuantity() + 1);
-                            } else {
-                                if(product.getQuantity() > 1) {
-                                    product.setQuantity(product.getQuantity() - 1);
-                                } else {
-                                    shoppingCart.getAll().remove(product);
-                                }
-                            }
-                        }
-                    });
-                }
-
-                if(!prodFound) {
-                    shoppingCart.addToList(new ShoppingCartElement(prod, 1));
-                }
-            }
-        }
 
     }
+
+
+    private void write(HttpServletResponse response, Map<String, Object> map) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(map)); //this is how simple GSON works
+    }
+
+
 }
