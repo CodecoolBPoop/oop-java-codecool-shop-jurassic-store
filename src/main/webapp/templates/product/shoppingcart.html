@@ -46,6 +46,7 @@
             <div class="row">
                 <div class="col-sm">
                     <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
+                    <p th:text="${prod.getQuantity()}"></p>
                 </div>
                 <div class="col-sm">
                     <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
