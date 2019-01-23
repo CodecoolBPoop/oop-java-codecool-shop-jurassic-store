@@ -35,29 +35,34 @@ public class CartApi extends HttpServlet {
         ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        for (Product prod: productDataStore.getAll()
-             ) {
-            this.prodFound = false;
-            if(prod.getId()==id) {
-                if(!shoppingCart.getAll().isEmpty()) {
-                    shoppingCart.getAll().forEach(product -> {
-                        if (product.getProduct().equals(prod)) {
-                            if(action.equals("add")) {
-                                this.prodFound = true;
-                                product.setQuantity(product.getQuantity() + 1);
-                            } else {
-                                if(product.getQuantity() > 1) {
-                                    product.setQuantity(product.getQuantity() - 1);
+
+        if (action.equals("removeAll")) {
+            shoppingCart.removeAll();
+        } else {
+            for (Product prod : productDataStore.getAll()
+            ) {
+                this.prodFound = false;
+                if (prod.getId() == id) {
+                    if (!shoppingCart.getAll().isEmpty()) {
+                        shoppingCart.getAll().forEach(product -> {
+                            if (product.getProduct().equals(prod)) {
+                                if (action.equals("add")) {
+                                    this.prodFound = true;
+                                    product.setQuantity(product.getQuantity() + 1);
                                 } else {
-                                    shoppingCart.getAll().remove(product);
+                                    if (product.getQuantity() > 1) {
+                                        product.setQuantity(product.getQuantity() - 1);
+                                    } else {
+                                        shoppingCart.getAll().remove(product);
+                                    }
                                 }
                             }
-                        }
-                    });
-                }
+                        });
+                    }
 
-                if(!prodFound) {
-                    shoppingCart.addToList(new ShoppingCartElement(prod, 1));
+                    if (!prodFound) {
+                        shoppingCart.addToList(new ShoppingCartElement(prod, 1));
+                    }
                 }
             }
         }

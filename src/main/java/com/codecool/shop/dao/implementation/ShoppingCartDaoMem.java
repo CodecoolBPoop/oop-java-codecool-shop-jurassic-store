@@ -29,6 +29,12 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     }
 
     @Override
+    public void removeAll() {
+        instance = null;
+        getInstance();
+    }
+
+    @Override
     public List<ShoppingCartElement> getAll() {
         return productsInCart;
     }

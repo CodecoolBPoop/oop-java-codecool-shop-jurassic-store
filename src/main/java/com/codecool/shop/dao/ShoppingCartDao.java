@@ -10,5 +10,6 @@ public interface ShoppingCartDao {
 
     void addToList(ShoppingCartElement item);
     void removeFromList(ShoppingCartElement item);
+    void removeAll();
     List<ShoppingCartElement> getAll();
 }
