@@ -44,8 +44,7 @@ public class CartApi extends HttpServlet {
                 this.prodFound = false;
                 if (prod.getId() == id) {
                     if (!shoppingCart.getAll().isEmpty()) {
-                        shoppingCart.getAll().forEach(product -> {
-                            if (product.getProduct().equals(prod)) {
+                        shoppingCart.getAll().stream().filter(product -> product.getProduct().equals(prod)).peek(product -> {
                                 if (action.equals("add")) {
                                     this.prodFound = true;
                                     product.setQuantity(product.getQuantity() + 1);
@@ -56,7 +55,6 @@ public class CartApi extends HttpServlet {
                                         shoppingCart.getAll().remove(product);
                                     }
                                 }
-                            }
                         });
                     }
 
