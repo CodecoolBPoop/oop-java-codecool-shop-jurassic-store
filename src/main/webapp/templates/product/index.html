@@ -68,13 +68,13 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success btn-cart" th:id="btn + ${prod.getId()}" th:value="${prod.getId()}" href="#">Add to cart</a>
+                        <button class="btn btn-success btn-cart" th:id="btn + ${prod.getId()}" th:value="${prod.getId()}" href="#">Add to cart</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
 </div>
 
 <div th:replace="footer.html :: copy"></div>

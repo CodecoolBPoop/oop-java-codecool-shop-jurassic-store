@@ -45,11 +45,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                    <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
                 </div>
                 <div class="col-sm">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                    <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
+                    <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
                     <button type="submit" class="btn btn-danger">REMOVE</button>
                     <button type="submit" class="btn btn-danger">ADD</button>
                 </div>
