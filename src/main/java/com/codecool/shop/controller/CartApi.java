@@ -11,11 +11,13 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/cart-api"})
 public class CartApi extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         String prodId = req.getParameter("prodId");
-        int id = gson.fromJson(prodId, int.class);
+        Integer id = gson.fromJson(prodId, int.class);
+
         System.out.println(id);
     }
 }
