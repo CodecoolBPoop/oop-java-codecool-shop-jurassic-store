@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Confirmation Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/confirmation.css" />
+</head>
+<body>
+    <div class="card center">
+        <h1>Confirm Purchase</h1>
+        <form action="/datasave" method="POST">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="First name" name = "firstName">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Last name" name = "lastName">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+            </div>
+            <div class="form-row">
+                <div class="col-7">
+                    <input type="text" class="form-control" placeholder="City" name="city">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="State" name="state">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Zip" name="zip">
+                </div>
+            </div>
+
+            <p>
+                <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
+            </p>
+        </form>
+    </div>
+</body>
+</html>
