@@ -12,6 +12,14 @@ let shoppingCart = {
                 http.onreadystatechange = function () {
                     if (http.readyState == 4 && http.status == 200) {
                         console.log("szákszeksz");
+                        let itemCount = document.getElementById('itemCount');
+                        itemCount.style.display = "block";
+                        if (itemCount.innerText == "") {
+                            itemCount.innerText = 1;
+                        } else {
+                            itemCount.innerText = parseInt(itemCount.innerText)+1;
+                        }
+
                     }
                 }
                 })
