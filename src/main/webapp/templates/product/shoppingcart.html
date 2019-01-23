@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart Review</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <div id="sidebar-wrapper">
+   <!--     <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>-->
+    </div>
+    <h1>Your Cart</h1>
+    <div class="block-wrapper" data-aos="fade-up" th:each="prod,iterStat : ${shoppingCart}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                </div>
+                <div class="col-sm">
+                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                    <button type="submit" class="btn btn-danger">REMOVE</button>
+                    <button type="submit" class="btn btn-danger">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>AOS.init();</script>
+</body>
+</html>
