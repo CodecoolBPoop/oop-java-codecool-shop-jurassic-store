@@ -1,4 +1,11 @@
 let shoppingCart = {
+    checkCartItems: function () {
+        let itemCount = document.getElementById('itemCount');
+        if (itemCount.innerText == 0) {
+            itemCount.style.display = "none";
+            itemCount.innerText = "";
+        }
+    },
     addToCart: function () {
         let cartBtns = document.getElementsByClassName("btn-cart");
         for (let i = 0; i < cartBtns.length; i++) {

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
     private static ShoppingCartDaoMem instance = null;
+    private int numberOfElements;
 
     private List<ShoppingCartElement> productsInCart = new ArrayList<>();
 
@@ -32,6 +33,13 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     public void removeAll() {
         instance = null;
         getInstance();
+    }
+
+    @Override
+    public int numberOfElements() {
+        numberOfElements = 0;
+        productsInCart.forEach(shoppingCartElement -> numberOfElements += shoppingCartElement.getQuantity());
+        return numberOfElements;
     }
 
     @Override

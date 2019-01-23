@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -35,6 +36,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("recipient", "World");
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        context.setVariable("cartItems", ShoppingCartDaoMem.getInstance().numberOfElements());
         engine.process("product/index.html", context, resp.getWriter());
     }
 
