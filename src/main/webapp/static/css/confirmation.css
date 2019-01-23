@@ -1,11 +1,10 @@
-.card {
+.block-wrapper {
     position: relative;
 
     display: block;
 
     margin: 6% 5% 2%;
     padding: 5%;
-
 
     border-radius: 2px;
     background: rgba(255, 229, 252, 0.8);
