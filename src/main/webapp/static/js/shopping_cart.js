@@ -4,7 +4,7 @@ let shoppingCart = {
         for (let i = 0; i < cartBtns.length; i++) {
             cartBtns[i].addEventListener("click", function () {
                 let clickedBtn = event.target;
-                let productId = clickedBtn.value;
+                let productId = clickedBtn.id.replace("btn", "");
                 fetch("http://127.0.0.1:8080/cart-api", {
                     method: 'POST',
                     mode: "no-cors",
