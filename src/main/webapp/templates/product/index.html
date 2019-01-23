@@ -56,7 +56,8 @@
         </div>
     </div>
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <span th:if="${category} == null"><strong th:text="'All Products'">Category Title</strong></span>
+        <span th:if="${category} != null"><strong th:text="${category.name}">Category Title</strong></span>
     </div>
 
     <div id="products" class="row">
