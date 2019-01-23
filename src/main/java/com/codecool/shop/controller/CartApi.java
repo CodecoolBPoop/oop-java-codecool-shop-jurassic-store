@@ -1,5 +1,10 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ShoppingCartElement;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -24,5 +29,16 @@ public class CartApi extends HttpServlet {
         String action = jobj.get("action").toString().replace("\"", "");
         System.out.println(id);
         System.out.println(action);
+
+        ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
+
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        for (Product prod: productDataStore.getAll()
+             ) {
+            if(prod.getId()==id) {
+               shoppingCart.addToList(new ShoppingCartElement(prod, 1));
+            }
+        };
+
     }
 }

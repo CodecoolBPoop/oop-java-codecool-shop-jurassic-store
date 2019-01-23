@@ -4,7 +4,7 @@ public class ShoppingCartElement {
     private int quantity;
     private Product product;
 
-    ShoppingCartElement(Product product, int quantity) {
+    public ShoppingCartElement(Product product, int quantity) {
         this.quantity = quantity;
         this.product = product;
     }
