@@ -44,18 +44,15 @@ public class CartApi extends HttpServlet {
                                 this.prodFound = true;
                                 product.setQuantity(product.getQuantity() + 1);
                                 map.put("prodQuantity", product.getQuantity());
-                                map.put("productId", product.getProduct().getId());
                             } else {
                                 if(product.getQuantity() > 1) {
                                     product.setQuantity(product.getQuantity() - 1);
-                                    System.out.println(product.getQuantity());
                                     map.put("prodQuantity", product.getQuantity());
-                                    map.put("productId", product.getProduct().getId());
                                 } else {
-                                    map.put("productId", product.getProduct().getId());
                                     cartIter.remove();
                                 }
                             }
+                            map.put("productId", product.getProduct().getId());
                         }
                     }
                 }
@@ -65,18 +62,8 @@ public class CartApi extends HttpServlet {
             }
         }
 
-        /*for (ShoppingCartElement prod: shoppingCart.getAll()
-             ) {
-            System.out.println(prod.getProduct().getName());
-            System.out.println(prod.getQuantity());
-
-        }*/
-
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(map);
         resp.getWriter().write(json);
-
     }
-
-
 }
