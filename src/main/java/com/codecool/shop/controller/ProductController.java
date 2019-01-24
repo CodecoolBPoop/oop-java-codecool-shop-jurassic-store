@@ -38,7 +38,6 @@ public class ProductController extends HttpServlet {
         context.setVariable("suppliers", supplierDataStore.getAll());
 
         if (req.getParameter("category") == null && req.getParameter("supplier") == null) {
-            context.setVariable("category", null);
             context.setVariable("products", productDataStore.getAll());
         } else if (req.getParameter("category")!= null && req.getParameter("supplier") == null){
             filterByCategory(context, req);
