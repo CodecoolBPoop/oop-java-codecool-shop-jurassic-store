@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
-                            <h3><span class="badge badge-danger" th:id="quantity + ${prod.getProduct().getId()}" th:text="${prod.getQuantity()}"> Quantity </span></h3>
+                            <h3><span class="badge badge-danger" th:id="quantity + ${prod.getProduct().getId()}" th:text="${prod.getQuantity()} + 'pcs'"> Quantity </span></h3>
                         </div>
                         <div class="col-sm">
                             <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>

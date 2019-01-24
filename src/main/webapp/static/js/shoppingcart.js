@@ -37,14 +37,14 @@ let shoppingCart = {
 
     handleAdding: function(jsonData) {
         let plusItem = document.getElementById("quantity" + jsonData["productId"]);
-        plusItem.innerText = jsonData["prodQuantity"];
+        plusItem.innerText = jsonData["prodQuantity"] + "pcs";
         document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
     },
 
     handleRemoving: function(jsonData) {
         let minusItem = document.getElementById("quantity" + jsonData["productId"]);
         if(jsonData["prodQuantity"]!=null) {
-            minusItem.innerText = jsonData["prodQuantity"];
+            minusItem.innerText = jsonData["prodQuantity"] + "pcs";
         } else {
             let removeElem = document.getElementById("cont" + jsonData["productId"]);
             removeElem.parentNode.removeChild(removeElem);
