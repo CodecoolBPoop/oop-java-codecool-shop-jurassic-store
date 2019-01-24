@@ -9,6 +9,7 @@ import java.util.List;
 public class ShoppingCartDaoMem implements ShoppingCartDao {
     private static ShoppingCartDaoMem instance = null;
     private int numberOfElements;
+    private double sum;
 
     private List<ShoppingCartElement> productsInCart = new ArrayList<>();
 
@@ -17,6 +18,13 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
             instance = new ShoppingCartDaoMem();
         }
         return instance;
+    }
+
+    @Override
+    public double sumOfPrice() {
+        sum = 0;
+        ShoppingCartDaoMem.getInstance().getAll().forEach(item -> sum += item.getProduct().getPriceFloat() * item.getQuantity());
+        return sum;
     }
 
     @Override

@@ -1,50 +1,72 @@
 let shoppingCart = {
-    addToCart: function () {
-        let cartBtns = document.getElementsByClassName("btn-danger");
+    modifyCart: function () {
+        let cartBtns = document.getElementsByClassName("btn-cart");
         for (let i = 0; i < cartBtns.length; i++) {
             cartBtns[i].addEventListener("click", function () {
                 let clickedBtn = event.target;
-                let productId = clickedBtn.id.replace("btn", "");
-                let action = clickedBtn.innerText.toLocaleLowerCase();
-                let counter = document.getElementById("counter" + productId);
-                let count = parseInt(counter.innerText);
-                console.log(count);
-                let allow = false;
-                if (count > 1 && action != "add"){
-                    allow = true}
-                if (allow || action == "add") {
-                    let http = new XMLHttpRequest();
-                    http.open("GET", "http://127.0.0.1:8080/cart-api?prodId=" + productId + "&action=" + action, true);
-                    http.send();
-                    http.onreadystatechange = function () {
-                        if (http.readyState == 4 && http.status == 200) {
-                            console.log("szákszeksz");
-                            if (action == "add") {
-
-                                counter.innerText = count + 1;
-                            } else {
-                                counter.innerText = count - 1;
+                if (clickedBtn.dataset.action === "add") {
+                    let productId = parseInt(clickedBtn.dataset.id);
+                    let dataToSend = {"prodId": productId, "action": "add"};
+                    $.ajax({
+                        url: "/cart-api",
+                        type: "POST",
+                        data: dataToSend,
+                        success: function (data) {
+                            let jsonData = JSON.parse(data);
+                            shoppingCart.handleAdding(jsonData);
+                        }
+                    })
+                } else {
+                    let productId = parseInt(clickedBtn.dataset.id);
+                    let dataToSend = {"prodId": productId, "action": "remove"};
+                    $.ajax({
+                        url: "/cart-api",
+                        type: "POST",
+                        data: dataToSend,
+                        success: function (data) {
+                            if (clickedBtn.id === "remove" + productId.toString()) {
+                                let jsonData = JSON.parse(data);
+                                shoppingCart.handleRemoving(jsonData);
                             }
                         }
-                    }
+                    })
                 }
             })
         }
     },
-    
+
+    handleAdding: function(jsonData) {
+        let plusItem = document.getElementById("quantity" + jsonData["productId"]);
+        plusItem.innerText = jsonData["prodQuantity"];
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+    },
+
+    handleRemoving: function(jsonData) {
+        let minusItem = document.getElementById("quantity" + jsonData["productId"]);
+        if(jsonData["prodQuantity"]!=null) {
+            minusItem.innerText = jsonData["prodQuantity"];
+        } else {
+            let removeElem = document.getElementById("cont" + jsonData["productId"]);
+            removeElem.parentNode.removeChild(removeElem);
+        }
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+    },
+
     emptyCart: function () {
         let clearCart = document.getElementById('clearCart');
         clearCart.addEventListener('click', function () {
             let http = new XMLHttpRequest();
-            http.open("GET", "http://127.0.0.1:8080/cart-api?prodId=" + 0 + "&action=removeAll", true);
+            http.open("POST", "http://127.0.0.1:8080/cart-api?prodId=" + 0 + "&action=removeAll", true);
             http.send();
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200) {
-                    console.log("szákszeksz");
-                    }
+                    let itemCount = document.getElementById('itemCount');
+                    itemCount.style.display = "none";
+                    itemCount.innerText = "";
                 }
-            })
+            }
+        })
     }
 };
 
-shoppingCart.addToCart();
+shoppingCart.modifyCart();

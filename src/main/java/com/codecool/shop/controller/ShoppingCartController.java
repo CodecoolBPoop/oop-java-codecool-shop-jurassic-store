@@ -3,7 +3,6 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.model.ShoppingCartElement;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -20,16 +19,12 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
-
-        double totalPrice = 0;
-        for (ShoppingCartElement product:shoppingCart.getAll()) {
-            totalPrice += product.getProduct().getPriceFloat() * product.getQuantity();
-        }
+        double sumPrice = Math.round(shoppingCart.sumOfPrice()*1000.0)/100;
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("shoppingCart",shoppingCart.getAll());
-        context.setVariable("totalPrice",totalPrice);
+        context.setVariable("sumPrice",sumPrice);
         engine.process("product/shoppingcart.html", context, resp.getWriter());
     }
 }

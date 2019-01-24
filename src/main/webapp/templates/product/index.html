@@ -51,7 +51,29 @@
 
 <div class="container">
     <div class="block-wrapper">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Product Category
+        </button>
+        <div class="dropdown-menu">
+            <div th:each="cat,iterStat : ${categories}">
+                <a class="dropdown-item" th:attr="href='/?category=' + ${cat.getId()}" th:text="${cat.getName()}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Supplier
+        </button>
+        <div class="dropdown-menu">
+            <div th:each="supp,iterStat : ${suppliers}">
+                <a class="dropdown-item" th:attr="href='/?supplier=' + ${supp.getId()}" th:text="${supp.getName()}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <span th:if="${category} == null"><strong th:text="'All Products'">Category Title</strong></span>
+        <span th:if="${category} != null"><strong th:text="${category.name}">Category Title</strong></span>
     </div>
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
@@ -68,7 +90,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <button class="btn btn-success btn-cart" th:id="btn + ${prod.getId()}" th:value="${prod.getId()}" href="#">Add to cart</button>
+                        <button class="btn btn-success btn-cart" th:id="btn + ${prod.getId()}" data-action="add" th:data-id="${prod.getId()}" href="#">Add to cart</button>
                     </div>
                 </div>
             </div>
