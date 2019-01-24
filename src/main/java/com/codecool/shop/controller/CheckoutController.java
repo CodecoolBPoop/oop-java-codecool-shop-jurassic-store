@@ -14,22 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/shopping-cart"})
-public class ShoppingCartController extends HttpServlet {
+@WebServlet(urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
-
-        double totalPrice = 0;
-        for (ShoppingCartElement product:shoppingCart.getAll()) {
-            totalPrice += product.getProduct().getPriceFloat() * product.getQuantity();
-        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("shoppingCart",shoppingCart.getAll());
-        context.setVariable("totalPrice",totalPrice);
-        engine.process("product/shoppingcart.html", context, resp.getWriter());
+        engine.process("product/confirmation.html", context, resp.getWriter());
     }
 }
