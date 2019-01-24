@@ -39,6 +39,8 @@ let index = {
                     let itemCount = document.getElementById('itemCount');
                     itemCount.style.display = "none";
                     itemCount.innerText = "";
+                    let cartBtn = document.getElementById("cartLink");
+                    cartBtn.href = "#";
                     }
                 }
             })
