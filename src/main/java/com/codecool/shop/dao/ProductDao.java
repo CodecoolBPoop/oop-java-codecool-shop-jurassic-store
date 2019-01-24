@@ -4,6 +4,8 @@ import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public interface ProductDao {
@@ -15,5 +17,7 @@ public interface ProductDao {
     List<Product> getAll();
     List<Product> getBy(Supplier supplier);
     List<Product> getBy(ProductCategory productCategory);
-
+    List<Product> getBy(List<Supplier> suppliers);
+    List<Product> getBy(ArrayList<ProductCategory> productCategories);
+    List<Product> getBy(List<Supplier> suppliers, List<ProductCategory> categories);
 }
