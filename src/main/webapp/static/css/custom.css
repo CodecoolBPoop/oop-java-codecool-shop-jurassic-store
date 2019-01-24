@@ -63,13 +63,13 @@
 
 #itemCount {
     display: block;
-    width: 6vw;
-    height: 6vw;
+    width: 5vw;
+    height: 5vw;
     border-radius: 50%;
     background: red;
     color: white;
     text-align: center;
-    font-size: 4vw;
+    font-size: 3vw;
 }
 
 #itemCountContainer {
@@ -166,8 +166,8 @@ h3{
 .navHeader{
     background: rgba(171, 96, 12, 0.8);
     text-align: center;
-    padding-top: 15%;
-    padding-bottom: 15%;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 
 .navHeader h1{
@@ -175,7 +175,7 @@ h3{
 }
 
 .sorting{
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 5%;
     border-radius: 10px;
     background: rgba(171, 96, 12, 0.8);
@@ -199,5 +199,5 @@ h3{
 }
 
 .form-check-label {
-    font-size: 2vw;
+    font-size: 1.3vw;
 }
