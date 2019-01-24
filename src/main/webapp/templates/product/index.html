@@ -56,13 +56,13 @@
         <div th:each="cat,iterStat : ${categories}">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="category" th:attr="value=${cat.getId()}, id=${cat.getId()}">
-                <label class="form-check-label" th:attr="for=${cat.getId()}" th:text="${cat.getName()}">Default checkbox</label>
+                <label class="form-check-label" th:attr="for=${cat.getId()}" th:text="${cat.getName()}"><span></span>Default checkbox</label>
             </div>
         </div>
         <div th:each="supp,iterStat : ${suppliers}">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="supplier" th:attr="value=${supp.getId()}, id=${supp.getId()}">
-                <label class="form-check-label" th:attr="for=${supp.getId()}" th:text="${supp.getName()}">Default checkbox</label>
+                <input class="form-check-input" type="checkbox" name="supplier" th:attr="value=${supp.getId()}, id=${supp.getId()}+'_s'">
+                <label class="form-check-label" th:attr="for=${supp.getId()}+'_s'" th:text="${supp.getName()}"><span></span>Default checkbox</label>
             </div>
         </div>
         <button type="submit">Submit</button>
