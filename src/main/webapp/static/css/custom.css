@@ -63,13 +63,21 @@
 
 #itemCount {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 6vw;
+    height: 6vw;
     border-radius: 50%;
     background: red;
     color: white;
     text-align: center;
-    font-size: 5vw;
+    font-size: 4vw;
+}
+
+#itemCountContainer {
+    display: contents;
+}
+
+#cartContainer {
+    padding-bottom: 1vw;
 }
 
 img{

@@ -65,14 +65,14 @@
     </div>
 
     <div id="cart" class="cart-content" data-aos="fade-up">
-        <div class="row">
+        <div class="row" id="itemCountContainer">
             <div class="col-sm">
+                <span id="itemCount" th:text="${cartItems}"></span>
+            </div>
+            <div class="col-sm" id="cartContainer">
                 <a id="cartLink" href="#">
                     <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
                 </a>
-            </div>
-            <div class="col-sm">
-                <span id="itemCount" th:text="${cartItems}"></span>
             </div>
         </div>
         <button class="clear btn btn-danger" id="clearCart">Empty Cart</button>
