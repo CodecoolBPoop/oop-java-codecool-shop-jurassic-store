@@ -12,7 +12,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     private double sum;
 
     private List<ShoppingCartElement> productsInCart = new ArrayList<>();
-
+    //TODO
     public static ShoppingCartDaoMem getInstance() {
         if (instance == null) {
             instance = new ShoppingCartDaoMem();
