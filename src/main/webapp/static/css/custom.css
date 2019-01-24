@@ -80,6 +80,10 @@
     padding-bottom: 1vw;
 }
 
+#filterList {
+    text-align: left;
+}
+
 img{
     width: 100%;
     height: auto;
@@ -192,4 +196,8 @@ h3{
     padding: 5%;
     width: 80%;
     margin: auto;
+}
+
+.form-check-label {
+    font-size: 2vw;
 }

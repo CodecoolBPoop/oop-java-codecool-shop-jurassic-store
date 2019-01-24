@@ -42,7 +42,7 @@
     <div class="sorting" data-aos="fade-up">
         <h3>Sort by:</h3>
         <form action="/filter" method="get">
-            <div class="row">
+            <div class="row" id="filterList">
                 <div class="col-sm">
                     <div th:each="cat,iterStat : ${categories}">
                         <div class="form-check">
