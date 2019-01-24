@@ -5,10 +5,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCartElement;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart-api"})
@@ -25,18 +23,59 @@ public class CartApi extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productId = req.getParameter("prodId");
+        int id = Integer.parseInt(req.getParameter("prodId"));
         String action = req.getParameter("action");
+        HashMap map = new HashMap();
 
+        ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
+        Iterator cartIter = shoppingCart.getAll().iterator();
+        Iterator shopIter = productDataStore.getAll().iterator();
 
-    }
+        while(shopIter.hasNext()) {
+            Product prod = (Product) shopIter.next();
+            this.prodFound = false;
+            if(prod.getId()==id) {
+                if(!shoppingCart.getAll().isEmpty()) {
+                    while(cartIter.hasNext()) {
+                        ShoppingCartElement product = (ShoppingCartElement) cartIter.next();
+                        if(product.getProduct().equals(prod)) {
+                            if(action.equals("add")) {
+                                this.prodFound = true;
+                                product.setQuantity(product.getQuantity() + 1);
+                                map.put("prodQuantity", product.getQuantity());
+                                map.put("productId", product.getProduct().getId());
+                            } else {
+                                if(product.getQuantity() > 1) {
+                                    product.setQuantity(product.getQuantity() - 1);
+                                    System.out.println(product.getQuantity());
+                                    map.put("prodQuantity", product.getQuantity());
+                                    map.put("productId", product.getProduct().getId());
+                                } else {
+                                    map.put("productId", product.getProduct().getId());
+                                    cartIter.remove();
+                                }
+                            }
+                        }
+                    }
+                }
+                if(!prodFound) {
+                    shoppingCart.addToList(new ShoppingCartElement(prod, 1));
+                }
+            }
+        }
 
+        /*for (ShoppingCartElement prod: shoppingCart.getAll()
+             ) {
+            System.out.println(prod.getProduct().getName());
+            System.out.println(prod.getQuantity());
 
-    private void write(HttpServletResponse response, Map<String, Object> map) throws IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(new Gson().toJson(map)); //this is how simple GSON works
+        }*/
+
+        Gson gson = new GsonBuilder().create();
+        String json = gson.toJson(map);
+        resp.getWriter().write(json);
+
     }
 
 
