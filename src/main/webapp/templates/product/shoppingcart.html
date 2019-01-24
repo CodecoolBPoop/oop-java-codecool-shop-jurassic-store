@@ -13,58 +13,36 @@
     <script src="/static/js/shoppingcart.js" defer></script>
 </head>
 <body>
-    <div id="sidebar-wrapper">
-        <div>
-            <h2 th:text="${sumPrice}" id="sumPrice"></h2>
+    <div class="sidenav">
+        <h2 id="sumPrice" th:text="${sumPrice}"></h2>
+        <h2>USD</h2>
+        <div class="checkout">
+            <a href="/checkout">To Checkout</a>
         </div>
-   <!--     <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Start Bootstrap
-                </a>
-            </li>
-            <li>
-                <a href="#">Dashboard</a>
-            </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ul>-->
+        <div class="checkout">
+            <a href="/">Back to Shopping</a>
+        </div>
     </div>
-    <h1>Your Cart</h1>
-    <div th:each="prod,iterStat : ${shoppingCart}">
-    <div class="block-wrapper" data-aos="fade-up" th:id="cont + ${prod.getProduct().getId()}">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
-                    <h3><span class="badge badge-danger" th:id="quantity + ${prod.getProduct().getId()}" th:text="${prod.getQuantity()}"> Quantity </span></h3>
-                </div>
-                <div class="col-sm">
-                    <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
-                    <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
-                    <button type="submit" class="btn btn-danger btn-cart" th:id="remove + ${prod.getProduct().getId()}" data-action="remove" th:data-id="${prod.getProduct().getId()}">REMOVE</button>
-                    <button type="submit" class="btn btn-danger btn-cart" th:id="quantity + ${prod.getProduct().getId()}" data-action="add" th:data-id="${prod.getProduct().getId()}">ADD</button>
+    <div class="card-content">
+        <div th:each="prod,iterStat : ${shoppingCart}">
+            <div class="block-wrapper" data-aos="fade-up" th:id="cont + ${prod.getProduct().getId()}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
+                            <h3><span class="badge badge-danger" th:id="quantity + ${prod.getProduct().getId()}" th:text="${prod.getQuantity()}"> Quantity </span></h3>
+                        </div>
+                        <div class="col-sm">
+                            <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
+                            <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
+                            <button type="submit" class="btn btn-danger btn-cart" th:id="remove + ${prod.getProduct().getId()}" data-action="remove" th:data-id="${prod.getProduct().getId()}">REMOVE</button>
+                            <button type="submit" class="btn btn-danger btn-cart" th:id="quantity + ${prod.getProduct().getId()}" data-action="add" th:data-id="${prod.getProduct().getId()}">ADD</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <script>AOS.init();</script>
 </body>
 </html>

@@ -64,7 +64,7 @@ public class CartApi extends HttpServlet {
                 }
             }
 
-        double sumPrice = shoppingCart.sumOfPrice();
+        double sumPrice = Math.round(shoppingCart.sumOfPrice()*100.0)/100.0;
         map.put("sumPrice",sumPrice);
         writeResponse(resp, map);
         }

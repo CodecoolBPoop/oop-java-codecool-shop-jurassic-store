@@ -34,75 +34,56 @@ img{
     font-weight: bold;
 }
 
-#sidebar-wrapper {
-    left: 250px;
+
+.sidenav {
     height: 100%;
-    background: #000;
-    width: 50%;
-}
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
+    width: 30%;
+    position: fixed;
+    z-index: 1;
     top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    left: 0;
+    background: rgba(255, 162, 29, 0.9);
+    overflow-x: hidden;
+    padding-top: 20px;
+    word-wrap: break-word;
 }
 
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
     display: block;
-    text-decoration: none;
-    color: #999999;
 }
 
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.2);
+.sidenav a:hover {
+    color: #f1f1f1;
 }
 
-.sidebar-nav li a:active, .sidebar-nav li a:focus {
-    text-decoration: none;
+.main {
+    margin-left: 30%; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0 10px;
 }
 
-.sidebar-nav>.sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
 
-
-.sidebar-nav>.sidebar-brand a:hover {
-    color: #fff;
-    background: none;
+.card-content{
+    margin-left: 20%;
 }
 
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 0;
-    }
-    #wrapper.toggled {
-        padding-left: 250px;
-    }
-    #sidebar-wrapper {
-        width: 0;
-    }
-    #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
-    }
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+h2{
+    text-align: center;
+}
+.checkout{
+    transition:0.3s;
+    color: white;
+    background: #428bca;
+    text-align: center;
+}
+.checkout:hover{
+    background: #49aaf0;
 }

@@ -54,6 +54,13 @@
             <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!-- See comment at jetty plugin -->
         <!-- <dependency> -->
         <!--   <groupId>org.eclipse.jetty</groupId> -->
