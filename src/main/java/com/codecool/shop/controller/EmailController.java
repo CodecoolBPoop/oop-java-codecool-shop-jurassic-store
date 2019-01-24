@@ -52,8 +52,8 @@ public class EmailController extends HttpServlet {
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email,false));
             msg.setSubject("Webshop Purchase Confirmed");
-            msg.setText("Dear Mr/Mrs " + firstName + " " + lastName +
-                    " \nDo you think that dinosaurs are real? \n" +
+            msg.setText("Dear Mr/Mrs " + firstName + " " + lastName + "!" +
+                    " \n\nDo you think that dinosaurs are real? \n" +
                     " Oh my god, how childish you are. Anyway, your order is on the way to:\n "+zip + ", " + city +", "+ state + ".\n\n" +
                     " God is watching you, never forget that.");
             msg.setSentDate(new Date());
