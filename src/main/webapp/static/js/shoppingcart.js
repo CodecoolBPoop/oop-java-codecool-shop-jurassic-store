@@ -50,6 +50,7 @@ let shoppingCart = {
             removeElem.parentNode.removeChild(removeElem);
         }
         document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+        shoppingCart.isShoppingCartEmpty();
     },
 
     emptyCart: function () {
@@ -66,7 +67,20 @@ let shoppingCart = {
                 }
             }
         })
+    },
+
+    isShoppingCartEmpty: function () {
+        let cartBtns = document.getElementsByClassName("btn-cart");
+        if(cartBtns.length == 0) {
+            window.location.href = "/";
+        }
     }
 };
 
+
+
 shoppingCart.modifyCart();
+if(performance.navigation.type == 2){
+    location.reload(true);
+    shoppingCart.isShoppingCartEmpty();
+}
