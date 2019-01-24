@@ -28,30 +28,22 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
+        Supplier apple = new Supplier("Apple", "sdfsadf");
+        supplierDataStore.add(apple);
+
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory smartPhone = new ProductCategory("Smart Phone", "Hardware", "Smarter than you.");
+        ProductCategory eBook = new ProductCategory("Ebook Reader", "Hardware", "adasdfa");
         productCategoryDataStore.add(tablet);
         productCategoryDataStore.add(smartPhone);
+        productCategoryDataStore.add(eBook);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.982134f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
-        productDataStore.add(new Product("Tabletium 5000",90,"USD","It's just a test lol",tablet,amazon));
+        productDataStore.add(new Product("Smart Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", smartPhone, amazon));
+        productDataStore.add(new Product("Valami", 323, "USD", "asdfasdfadsfa", eBook, apple));
     }
 }
