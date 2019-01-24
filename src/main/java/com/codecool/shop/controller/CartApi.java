@@ -23,6 +23,7 @@ public class CartApi extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         int id = Integer.parseInt(req.getParameter("prodId"));
         String action = req.getParameter("action");
         HashMap map = new HashMap();
