@@ -1,4 +1,6 @@
 package com.codecool.shop.controller;// File Name SendEmail.java
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
@@ -57,6 +59,7 @@ public class EmailController extends HttpServlet {
             msg.setSentDate(new Date());
             Transport.send(msg);
             System.out.println("Message sent.");
+            ShoppingCartDaoMem.getInstance().removeAll();
         }catch (MessagingException e){ System.out.println("Erreur d'envoi, cause: " + e);}
         response.sendRedirect("/");
     }

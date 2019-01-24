@@ -19,7 +19,7 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ShoppingCartDaoMem shoppingCart = ShoppingCartDaoMem.getInstance();
-        double sumPrice = Math.round(shoppingCart.sumOfPrice()*1000.0)/100;
+        double sumPrice = Math.round(shoppingCart.sumOfPrice()*100.0)/100.0;
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
