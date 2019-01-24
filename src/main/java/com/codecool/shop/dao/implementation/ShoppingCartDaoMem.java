@@ -23,7 +23,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     @Override
     public double sumOfPrice() {
         sum = 0;
-        ShoppingCartDaoMem.getInstance().getAll().forEach(item -> sum += item.getProduct().getPriceDouble() * item.getQuantity());
+        ShoppingCartDaoMem.getInstance().getAll().forEach(item -> sum += item.getProduct().getPriceFloat() * item.getQuantity());
         return sum;
     }
 
