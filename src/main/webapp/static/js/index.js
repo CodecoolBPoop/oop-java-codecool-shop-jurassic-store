@@ -19,6 +19,8 @@ let index = {
                         data: dataToSend,
                     success: function (data) {
                         index.itemCountForCartIcon();
+                        let cartBtn = document.getElementById("cartLink");
+                        cartBtn.href = "/shopping-cart";
                     }
                 })
             })
