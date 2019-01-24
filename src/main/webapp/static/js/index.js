@@ -6,28 +6,21 @@ let index = {
             itemCount.innerText = "";
         }
     },
+
     addToCart: function () {
         let cartBtns = document.getElementsByClassName("btn-cart");
         for (let i = 0; i < cartBtns.length; i++) {
             cartBtns[i].addEventListener("click", function () {
                 let clickedBtn = event.target;
-                if (clickedBtn.dataset.action === "add") {
-                    let productId = parseInt(clickedBtn.dataset.id);
-                    let dataToSend = {"prodId": productId, "action": "add"};
-                    $.ajax({
-                            url: "/cart-api",
-                            type: "POST",
-                            data: dataToSend,
-                        success: function (data) {
-                            if (clickedBtn.id === "quantity" + productId.toString()) {
-                                let jsonData = JSON.parse(data);
-                                let plusItem = document.getElementById("quantity" + jsonData["productId"]);
-                                plusItem.innerText = jsonData["prodQuantity"];
-                            }
-                            index.itemCountForCartIcon();
-                        }
-                    })
-            }
+                let dataToSend = {"prodId": parseInt(clickedBtn.dataset.id), "action": "add"};
+                $.ajax({
+                        url: "/cart-api",
+                        type: "POST",
+                        data: dataToSend,
+                    success: function (data) {
+                        index.itemCountForCartIcon();
+                    }
+                })
             })
         }
 
