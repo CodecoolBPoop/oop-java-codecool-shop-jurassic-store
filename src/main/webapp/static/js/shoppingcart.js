@@ -1,5 +1,5 @@
 let shoppingCart = {
-    addToCart: function () {
+    modifyCart: function () {
         let cartBtns = document.getElementsByClassName("btn-cart");
         for (let i = 0; i < cartBtns.length; i++) {
             cartBtns[i].addEventListener("click", function () {
@@ -12,12 +12,8 @@ let shoppingCart = {
                         type: "POST",
                         data: dataToSend,
                         success: function (data) {
-                            if (clickedBtn.id === "quantity" + productId.toString()) {
-                                let jsonData = JSON.parse(data);
-                                let plusItem = document.getElementById("quantity" + jsonData["productId"]);
-                                plusItem.innerText = jsonData["prodQuantity"];
-                                document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
-                            }
+                            let jsonData = JSON.parse(data);
+                            shoppingCart.handleAdding(jsonData);
                         }
                     })
                 } else {
@@ -30,20 +26,30 @@ let shoppingCart = {
                         success: function (data) {
                             if (clickedBtn.id === "remove" + productId.toString()) {
                                 let jsonData = JSON.parse(data);
-                                let minusItem = document.getElementById("quantity" + jsonData["productId"]);
-                                if(jsonData["prodQuantity"]!=null) {
-                                    minusItem.innerText = jsonData["prodQuantity"];
-                                } else {
-                                    let removeElem = document.getElementById("cont" + jsonData["productId"]);
-                                    removeElem.parentNode.removeChild(removeElem);
-                                }
-                                document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+                                shoppingCart.handleRemoving(jsonData);
                             }
                         }
                     })
                 }
             })
         }
+    },
+
+    handleAdding: function(jsonData) {
+        let plusItem = document.getElementById("quantity" + jsonData["productId"]);
+        plusItem.innerText = jsonData["prodQuantity"];
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+    },
+
+    handleRemoving: function(jsonData) {
+        let minusItem = document.getElementById("quantity" + jsonData["productId"]);
+        if(jsonData["prodQuantity"]!=null) {
+            minusItem.innerText = jsonData["prodQuantity"];
+        } else {
+            let removeElem = document.getElementById("cont" + jsonData["productId"]);
+            removeElem.parentNode.removeChild(removeElem);
+        }
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
     },
 
     emptyCart: function () {
@@ -63,4 +69,4 @@ let shoppingCart = {
     }
 };
 
-shoppingCart.addToCart();
+shoppingCart.modifyCart();
