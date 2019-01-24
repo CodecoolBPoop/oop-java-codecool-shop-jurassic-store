@@ -1,4 +1,4 @@
-let shoppingCart = {
+let index = {
     checkCartItems: function () {
         let itemCount = document.getElementById('itemCount');
         if (itemCount.innerText == 0) {

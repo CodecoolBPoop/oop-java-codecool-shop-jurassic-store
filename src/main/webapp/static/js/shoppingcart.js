@@ -47,20 +47,22 @@ let shoppingCart = {
             })
         }
     },
-    
-    /*emptyCart: function () {
+
+    emptyCart: function () {
         let clearCart = document.getElementById('clearCart');
         clearCart.addEventListener('click', function () {
             let http = new XMLHttpRequest();
-            http.open("GET", "http://127.0.0.1:8080/cart-api?prodId=" + 0 + "&action=removeAll", true);
+            http.open("POST", "http://127.0.0.1:8080/cart-api?prodId=" + 0 + "&action=removeAll", true);
             http.send();
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200) {
-                    console.log("szákszeksz");
-                    }
+                    let itemCount = document.getElementById('itemCount');
+                    itemCount.style.display = "none";
+                    itemCount.innerText = "";
                 }
-            })
-    }*/
+            }
+        })
+    }
 };
 
 shoppingCart.addToCart();
