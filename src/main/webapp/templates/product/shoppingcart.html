@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart Review</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/js/shoppingcart.js" defer></script>
+</head>
+<body>
+    <div id="sidebar-wrapper">
+   <!--     <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>-->
+    </div>
+    <h1>Your Cart</h1>
+    <div th:each="prod,iterStat : ${shoppingCart}">
+        <div th:id="cont + ${prod.getProduct().getId()}">
+    <div class="block-wrapper" data-aos="fade-up" >
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getProduct().getId()} + '.jpg'" alt="" />
+                    <h3><span class="badge badge-danger" th:id="quantity + ${prod.getProduct().getId()}" th:text="${prod.getQuantity()}"> Quantity </span></h3>
+                </div>
+                <div class="col-sm">
+                    <h4 class="card-title" th:text="${prod.getProduct().getName()}">Product name</h4>
+                    <p class="lead" th:text="${prod.getProduct().getPrice()}">100 USD</p>
+                    <button type="submit" class="btn btn-danger btn-cart" th:id="remove + ${prod.getProduct().getId()}" data-action="remove" th:data-id="${prod.getProduct().getId()}">REMOVE</button>
+                    <button type="submit" class="btn btn-danger btn-cart" th:id="quantity + ${prod.getProduct().getId()}" data-action="add" th:data-id="${prod.getProduct().getId()}">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+    <script>AOS.init();</script>
+</body>
+</html>
