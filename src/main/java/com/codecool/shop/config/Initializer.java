@@ -28,7 +28,7 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(bayer);
         Supplier monsanto = new Supplier("Monsanto", "The Monsanto Company was an American agrochemical and agricultural biotechnology corporation.");
         supplierDataStore.add(monsanto);
-        Supplier dow = new Supplier("Dow Chemical Company", "The Dow Chemical Company, commonly referred to as Dow, is an American multinational chemical corporation headquartered in Midland, Michigan, United States, and the predecessor of the merged company DowDuPont.");
+        Supplier dow = new Supplier("Dow", "The Dow Chemical Company, commonly referred to as Dow, is an American multinational chemical corporation headquartered in Midland, Michigan, United States, and the predecessor of the merged company DowDuPont.");
         supplierDataStore.add(dow);
 
         //setting up a new product category

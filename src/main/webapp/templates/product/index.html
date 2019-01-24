@@ -42,8 +42,8 @@
     <div class="sorting" data-aos="fade-up">
         <h3>Sort by:</h3>
         <form action="/filter" method="get">
-            <div class="row" id="filterList">
-                <div class="col-sm">
+            <div class="row">
+                <div class="col-6">
                     <div th:each="cat,iterStat : ${categories}">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="category" th:attr="value=${cat.getId()}, id=${cat.getId()}">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-6">
                     <div th:each="supp,iterStat : ${suppliers}">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="supplier" th:attr="value=${supp.getId()}, id=${supp.getId()}">
