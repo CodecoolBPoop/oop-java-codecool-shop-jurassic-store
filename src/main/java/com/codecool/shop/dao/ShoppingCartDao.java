@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShoppingCartDao {
 
-
+    double sumOfPrice();
     void addToList(ShoppingCartElement item);
     void removeFromList(ShoppingCartElement item);
     void removeAll();

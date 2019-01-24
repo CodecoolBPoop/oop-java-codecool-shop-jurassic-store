@@ -14,6 +14,9 @@
 </head>
 <body>
     <div id="sidebar-wrapper">
+        <div>
+            <h2 th:text="${sumPrice}" id="sumPrice"></h2>
+        </div>
    <!--     <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
@@ -45,8 +48,7 @@
     </div>
     <h1>Your Cart</h1>
     <div th:each="prod,iterStat : ${shoppingCart}">
-        <div th:id="cont + ${prod.getProduct().getId()}">
-    <div class="block-wrapper" data-aos="fade-up" >
+    <div class="block-wrapper" data-aos="fade-up" th:id="cont + ${prod.getProduct().getId()}">
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -61,7 +63,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
     <script>AOS.init();</script>

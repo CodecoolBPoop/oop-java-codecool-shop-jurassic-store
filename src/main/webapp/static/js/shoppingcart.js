@@ -16,6 +16,7 @@ let shoppingCart = {
                                 let jsonData = JSON.parse(data);
                                 let plusItem = document.getElementById("quantity" + jsonData["productId"]);
                                 plusItem.innerText = jsonData["prodQuantity"];
+                                document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
                             }
                         }
                     })
@@ -36,14 +37,11 @@ let shoppingCart = {
                                     let removeElem = document.getElementById("cont" + jsonData["productId"]);
                                     removeElem.parentNode.removeChild(removeElem);
                                 }
+                                document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
                             }
                         }
                     })
                 }
-
-
-
-
             })
         }
     },

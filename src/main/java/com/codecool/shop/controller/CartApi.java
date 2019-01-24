@@ -66,7 +66,8 @@ public class CartApi extends HttpServlet {
                     }
                 }
             }
-
+        double sumPrice = shoppingCart.sumOfPrice();
+            map.put("sumPrice",sumPrice);
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(map);
         resp.getWriter().write(json);
