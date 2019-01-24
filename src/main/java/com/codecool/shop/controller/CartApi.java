@@ -36,41 +36,52 @@ public class CartApi extends HttpServlet {
         if (action.equals("removeAll")) {
             shoppingCart.removeAll();
         } else {
-            while (shopIter.hasNext()) {
+            this.prodFound = false;
+            while (shopIter.hasNext() && !prodFound) {
                 Product prod = (Product) shopIter.next();
-                this.prodFound = false;
                 if (prod.getId() == id) {
-                    if (!shoppingCart.getAll().isEmpty()) {
-                        while (cartIter.hasNext()) {
-                            ShoppingCartElement product = (ShoppingCartElement) cartIter.next();
-                            if (product.getProduct().equals(prod)) {
-                                if (action.equals("add")) {
-                                    this.prodFound = true;
-                                    product.setQuantity(product.getQuantity() + 1);
-                                    map.put("prodQuantity", product.getQuantity());
+                    while (cartIter.hasNext()) {
+                        ShoppingCartElement product = (ShoppingCartElement) cartIter.next();
+                        if (product.getProduct().equals(prod)) {
+                            if (action.equals("add")) {
+                                this.prodFound = true;
+                                handleQuantity(product, "plus", map);
+                            } else {
+                                this.prodFound = true;
+                                if (product.getQuantity() > 1) {
+                                    handleQuantity(product, "min", map);
                                 } else {
-                                    this.prodFound = true;
-                                    if (product.getQuantity() > 1) {
-                                        product.setQuantity(product.getQuantity() - 1);
-                                        map.put("prodQuantity", product.getQuantity());
-                                    } else {
-                                        cartIter.remove();
-                                    }
+                                    cartIter.remove();
                                 }
-                                map.put("productId", product.getProduct().getId());
                             }
+                            map.put("productId", product.getProduct().getId());
                         }
                     }
+
                     if (!prodFound) {
                         shoppingCart.addToList(new ShoppingCartElement(prod, 1));
                     }
                 }
             }
+
         double sumPrice = shoppingCart.sumOfPrice();
-            map.put("sumPrice",sumPrice);
+        map.put("sumPrice",sumPrice);
+        writeResponse(resp, map);
+        }
+    }
+
+    private void writeResponse(HttpServletResponse resp, HashMap map) throws IOException {
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(map);
         resp.getWriter().write(json);
+    }
+
+    private void handleQuantity(ShoppingCartElement product, String act, HashMap map) {
+        if(act.equals("plus")) {
+            product.setQuantity(product.getQuantity() + 1);
+        } else {
+            product.setQuantity(product.getQuantity() - 1);
         }
+        map.put("prodQuantity", product.getQuantity());
     }
 }
