@@ -20,6 +20,7 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/cart-api"})
 public class CartApi extends HttpServlet {
     private Boolean prodFound;
+    private Boolean prodInCart;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,15 +38,21 @@ public class CartApi extends HttpServlet {
             shoppingCart.removeAll();
         } else {
             this.prodFound = false;
+            // Iterating over the products of the shop
             while (shopIter.hasNext() && !prodFound) {
                 Product prod = (Product) shopIter.next();
+                //If the product's id equals to the id sent via ajax
                 if (prod.getId() == id) {
                     while (cartIter.hasNext()) {
+                        //Iterating over the products in the cart
                         ShoppingCartElement product = (ShoppingCartElement) cartIter.next();
+                        //If product is already in the cart
                         if (product.getProduct().equals(prod)) {
+                            //If the action is add --> adding quantity
                             if (action.equals("add")) {
                                 this.prodFound = true;
                                 handleQuantity(product, "plus", map);
+                            //If the action is remove --> decr quantity or remove from cart
                             } else {
                                 this.prodFound = true;
                                 if (product.getQuantity() > 1) {
@@ -57,7 +64,7 @@ public class CartApi extends HttpServlet {
                             map.put("productId", product.getProduct().getId());
                         }
                     }
-
+                    //If product is not in cart, create a new product in cart
                     if (!prodFound) {
                         shoppingCart.addToList(new ShoppingCartElement(prod, 1));
                     }
