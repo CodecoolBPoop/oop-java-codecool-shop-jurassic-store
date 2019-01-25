@@ -113,7 +113,7 @@ body{
 .sidenav {
     text-align: center;
     height: 100%;
-    width: 23%;
+    width: 30%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -124,7 +124,7 @@ body{
 }
 
 .container{
-    padding-left: 25%;
+    padding-left: 30%;
 }
 .card-header{
     background: rgba(255, 149, 14, 0.8);
