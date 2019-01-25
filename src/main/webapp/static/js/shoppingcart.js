@@ -38,7 +38,7 @@ let shoppingCart = {
     handleAdding: function(jsonData) {
         let plusItem = document.getElementById("quantity" + jsonData["productId"]);
         plusItem.innerText = jsonData["prodQuantity"] + "pcs";
-        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"] + " USD";
     },
 
     handleRemoving: function(jsonData) {
@@ -49,7 +49,7 @@ let shoppingCart = {
             let removeElem = document.getElementById("cont" + jsonData["productId"]);
             removeElem.parentNode.removeChild(removeElem);
         }
-        document.getElementById("sumPrice").innerText = jsonData["sumPrice"];
+        document.getElementById("sumPrice").innerText = jsonData["sumPrice"] +" USD";
         shoppingCart.isShoppingCartEmpty();
     },
 
