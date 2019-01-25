@@ -2,7 +2,7 @@ let index = {
     checkCartItems: function () {
         let itemCount = document.getElementById('itemCount');
         if (itemCount.innerText == 0) {
-            itemCount.style.display = "none";
+            itemCount.style.opacity = "0";
             itemCount.innerText = "";
         }
     },
@@ -37,7 +37,7 @@ let index = {
             http.onreadystatechange = function () {
                 if (http.readyState == 4 && http.status == 200) {
                     let itemCount = document.getElementById('itemCount');
-                    itemCount.style.display = "none";
+                    itemCount.style.opacity = "0";
                     itemCount.innerText = "";
                     let cartBtn = document.getElementById("cartLink");
                     cartBtn.href = "#";
@@ -48,7 +48,7 @@ let index = {
 
     itemCountForCartIcon: function () {
         let itemCount = document.getElementById('itemCount');
-        itemCount.style.display = "block";
+        itemCount.style.opacity = "1";
         if (itemCount.innerText == "") {
             itemCount.innerText = 1;
         } else {
