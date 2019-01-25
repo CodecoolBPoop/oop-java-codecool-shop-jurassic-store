@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
+import com.codecool.shop.writer.Writer;
 
 @WebServlet(urlPatterns = {"/datasave"})
 public class EmailController extends HttpServlet {
@@ -22,6 +22,7 @@ public class EmailController extends HttpServlet {
         String city = request.getParameter("city");
         String state = request.getParameter("state");
         String zip = request.getParameter("zip");
+
 
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         // Get a Properties object

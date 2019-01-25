@@ -50,9 +50,9 @@ img{
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
     display: block;
     color: white;
+    font-size: 2vw;
 }
 
 .sidenav a:hover {
@@ -116,4 +116,17 @@ body{
     padding: 5%;
     width: 80%;
     margin: auto;
+}
+
+h1{
+    font-size: 5vw;
+}
+h2{
+    font-size: 3vw;
+}
+h3{
+    font-size: 2vw;
+}
+.btn{
+    font-size: 1.2vw;
 }
