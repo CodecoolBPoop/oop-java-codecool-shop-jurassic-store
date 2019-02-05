@@ -7,10 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoJdbc implements ProductCategoryDao {
-    private static final String DATABASE = System.getenv("DATABASE");
-    private static final String DB_USER = System.getenv("USER");
-    private static final String DB_PASSWORD = System.getenv("PASSWORD");
+public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDao {
     private static ProductCategoryDaoJdbc instance = null;
 
     public static ProductCategoryDaoJdbc getInstance() {
@@ -110,12 +107,5 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
             e.printStackTrace();
         }
         return result;
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                                            DATABASE,
-                                            DB_USER,
-                                            DB_PASSWORD);
     }
 }
