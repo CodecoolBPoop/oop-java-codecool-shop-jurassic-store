@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 public class BaseModel {
 
@@ -59,6 +60,14 @@ public class BaseModel {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseModel baseModel = (BaseModel) o;
+        return name.equals(baseModel.name);
     }
 
 }
