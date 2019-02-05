@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.ShoppingCartSessionMap;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
@@ -18,20 +19,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = {"/", "/filter"})
 public class ProductController extends HttpServlet {
-
     private ProductDao productDataStore = ProductDaoMem.getInstance();
     private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    private ShoppingCartSessionMap shoppingCartSessionMap = ShoppingCartSessionMap.getInstance();
+    private ShoppingCartDaoMem shoppingCartDaoMem;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        HttpSession session=req.getSession();
+        shoppingCartDaoMem = shoppingCartSessionMap.getShoppingCartBySession(session);
 
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
@@ -46,7 +51,7 @@ public class ProductController extends HttpServlet {
         } else if (req.getParameter("category") != null && req.getParameter("supplier") != null) {
             filterByCatAndSupp(context, req);
         }
-        context.setVariable("cartItems", ShoppingCartDaoMem.getInstance().numberOfElements());
+        context.setVariable("cartItems", shoppingCartDaoMem.numberOfElements());
         engine.process("product/index.html", context, resp.getWriter());
 
     }

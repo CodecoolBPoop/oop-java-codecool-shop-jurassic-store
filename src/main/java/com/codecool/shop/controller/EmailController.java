@@ -8,13 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+
+import com.codecool.shop.model.ShoppingCartSessionMap;
 import com.codecool.shop.writer.Writer;
 
 @WebServlet(urlPatterns = {"/datasave"})
 public class EmailController extends HttpServlet {
 
+    private ShoppingCartSessionMap shoppingCartSessionMap = ShoppingCartSessionMap.getInstance();
+    private ShoppingCartDaoMem shoppingCartDaoMem;
+
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession httpSession=request.getSession();
+        shoppingCartDaoMem = shoppingCartSessionMap.getShoppingCartBySession(httpSession);
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -60,7 +68,8 @@ public class EmailController extends HttpServlet {
             msg.setSentDate(new Date());
             Transport.send(msg);
             System.out.println("Message sent.");
-            ShoppingCartDaoMem.getInstance().removeAll();
+            shoppingCartDaoMem.removeAll();
+            shoppingCartSessionMap.removeFromList(httpSession);
         }catch (MessagingException e){ System.out.println("Erreur d'envoi, cause: " + e);}
         response.sendRedirect("/");
     }

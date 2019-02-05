@@ -2,28 +2,25 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.ShoppingCartElement;
+import com.codecool.shop.model.ShoppingCartSessionMap;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
-    private static ShoppingCartDaoMem instance = null;
     private int numberOfElements;
     private double sum;
 
     private List<ShoppingCartElement> productsInCart = new ArrayList<>();
     //TODO
-    public static ShoppingCartDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ShoppingCartDaoMem();
-        }
-        return instance;
-    }
+
 
     @Override
     public double sumOfPrice() {
         sum = 0;
-        ShoppingCartDaoMem.getInstance().getAll().forEach(item -> sum += item.getProduct().getPriceFloat() * item.getQuantity());
+        getAll().forEach(item -> sum += item.getProduct().getPriceFloat() * item.getQuantity());
         return sum;
     }
 
@@ -39,8 +36,9 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     @Override
     public void removeAll() {
-        instance = null;
-        getInstance();
+        productsInCart.clear();
+        numberOfElements = 0;
+        sum = 0;
     }
 
     @Override
