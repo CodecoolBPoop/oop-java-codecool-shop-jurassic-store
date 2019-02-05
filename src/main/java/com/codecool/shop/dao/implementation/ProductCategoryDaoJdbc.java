@@ -11,6 +11,14 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static final String DATABASE = System.getenv("DATABASE");
     private static final String DB_USER = System.getenv("USER");
     private static final String DB_PASSWORD = System.getenv("PASSWORD");
+    private static ProductCategoryDaoJdbc instance = null;
+
+    public static ProductCategoryDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductCategoryDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(ProductCategory category){
@@ -37,7 +45,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            preparedStatement.close();
             if(resultSet.next()){
                 ProductCategory productCategory = new ProductCategory(
                                                                 resultSet.getString("name"),
@@ -47,6 +54,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
                 productCategory.setId(resultSet.getInt("id"));
                 return productCategory;
             }
+            preparedStatement.close();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -67,6 +75,19 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         }
     }
 
+    public void removeAll() {
+        String query = "DELETE FROM product_cat";
+        try (Connection connection = getConnection()
+        ){
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public List<ProductCategory> getAll() {
         String query = "SELECT * FROM product_cat";
@@ -75,7 +96,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            preparedStatement.close();
             while(resultSet.next()){
                 ProductCategory productCategory = new ProductCategory(
                         resultSet.getString("name"),
@@ -85,6 +105,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
                 productCategory.setId(resultSet.getInt("id"));
                 result.add(productCategory);
             }
+            preparedStatement.close();
         } catch (Exception e){
             e.printStackTrace();
         }

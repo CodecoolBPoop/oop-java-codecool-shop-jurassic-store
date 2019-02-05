@@ -3,6 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -20,7 +21,7 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
@@ -32,6 +33,7 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(dow);
 
         //setting up a new product category
+        ((ProductCategoryDaoJdbc) productCategoryDataStore).removeAll();
         ProductCategory herbivorous = new ProductCategory("Herbivorous", "Dinosaur", "Vegan");
         ProductCategory carnivorous = new ProductCategory("Carnivorous", "Dinosaur", "Not vegan");
         ProductCategory omnivorous = new ProductCategory("Omnivorous", "Dinosaur", "Not that vegan");

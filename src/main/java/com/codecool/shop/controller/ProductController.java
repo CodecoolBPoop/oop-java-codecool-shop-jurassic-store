@@ -3,14 +3,11 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.ShoppingCartSessionMap;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -26,7 +23,7 @@ import java.util.*;
 @WebServlet(urlPatterns = {"/", "/filter"})
 public class ProductController extends HttpServlet {
     private ProductDao productDataStore = ProductDaoMem.getInstance();
-    private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
     private SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
     private ShoppingCartSessionMap shoppingCartSessionMap = ShoppingCartSessionMap.getInstance();
     private ShoppingCartDaoMem shoppingCartDaoMem;
