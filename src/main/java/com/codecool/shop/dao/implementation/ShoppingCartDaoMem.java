@@ -14,8 +14,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     private double sum;
 
     private List<ShoppingCartElement> productsInCart = new ArrayList<>();
-    //TODO
-
 
     @Override
     public double sumOfPrice() {
