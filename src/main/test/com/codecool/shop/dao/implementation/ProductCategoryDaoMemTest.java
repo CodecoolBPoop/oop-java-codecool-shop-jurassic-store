@@ -43,12 +43,14 @@ class ProductCategoryDaoMemTest {
     @Test
     void findNot() {
         productCategoryDao.add(herbivorous);
+        assertTrue(productCategoryDao.getAll().contains(herbivorous));
         assertNull(productCategoryDao.find(0));
     }
 
     @Test
     void remove() {
         productCategoryDao.add(herbivorous);
+        assertTrue(productCategoryDao.getAll().contains(herbivorous));
         productCategoryDao.remove(1);
         assertFalse(productCategoryDao.getAll().contains(herbivorous));
     }

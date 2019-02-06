@@ -24,7 +24,6 @@ public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDa
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,category.getDescription());
-            System.out.println(category.getDescription());
             preparedStatement.setString(2,category.getDepartment());
             preparedStatement.setString(3,category.getName());
             preparedStatement.executeUpdate();
