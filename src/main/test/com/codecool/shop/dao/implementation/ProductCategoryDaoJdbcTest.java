@@ -40,6 +40,7 @@ class ProductCategoryDaoJdbcTest {
     @Test
     void findNot() {
         productCategoryDao.add(herbivorous);
+        assertTrue(productCategoryDao.getAll().contains(herbivorous));
         assertNull(productCategoryDao.find(0));
     }
 
