@@ -13,10 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductDaoJdbs extends DaoJdbc implements ProductDao {
+public class ProductDaoJdbc extends DaoJdbc implements ProductDao {
 
-    SupplierDaoJdbc supplierDaoJdbc = SupplierDaoJdbc.getInstance();
-    ProductCategoryDaoJdbc productCategoryDaoJdbc = ProductCategoryDaoJdbc.getInstance();
+    private SupplierDaoJdbc supplierDaoJdbc = SupplierDaoJdbc.getInstance();
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc = ProductCategoryDaoJdbc.getInstance();
+    private static ProductDaoJdbc instance = null;
+
+    public static ProductDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Product product) {
