@@ -46,6 +46,7 @@ class ProductCategoryDaoJdbcTest {
     @Test
     void remove() {
         productCategoryDao.add(herbivorous);
+        assertTrue(productCategoryDao.getAll().contains(herbivorous), "Add function failed!");
         productCategoryDao.remove(1);
         assertFalse(productCategoryDao.getAll().contains(herbivorous));
     }
