@@ -60,6 +60,10 @@ public class SupplierDaoJdbc extends DaoJdbc implements SupplierDao {
     @Override
     public void remove(int id) {
         String query = "DELETE FROM suppliers WHERE id = ?";
+        if(id < 1) {
+            throw new IllegalArgumentException();
+        }
+
         try (Connection connection = getConnection()
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -95,7 +99,7 @@ public class SupplierDaoJdbc extends DaoJdbc implements SupplierDao {
     }
 
     public void removeAll() {
-        String query = "DELETE FROM suppliers";
+        String query = "DELETE FROM suppliers; ALTER SEQUENCE suppliers_id_seq RESTART WITH 1;";
         try (Connection connection = getConnection()
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
