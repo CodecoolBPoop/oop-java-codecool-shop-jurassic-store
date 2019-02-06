@@ -3,9 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -20,10 +18,11 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
 
         //setting up a new supplier
+        ((SupplierDaoJdbc) supplierDataStore).removeAll();
         Supplier bayer = new Supplier("Bayer", "Bayer AG is a German multinational pharmaceutical and life sciences company and one of the largest pharmaceutical companies in the world.");
         supplierDataStore.add(bayer);
         Supplier monsanto = new Supplier("Monsanto", "The Monsanto Company was an American agrochemical and agricultural biotechnology corporation.");
@@ -32,6 +31,7 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(dow);
 
         //setting up a new product category
+        ((ProductCategoryDaoJdbc) productCategoryDataStore).removeAll();
         ProductCategory herbivorous = new ProductCategory("Herbivorous", "Dinosaur", "Vegan");
         ProductCategory carnivorous = new ProductCategory("Carnivorous", "Dinosaur", "Not vegan");
         ProductCategory omnivorous = new ProductCategory("Omnivorous", "Dinosaur", "Not that vegan");
