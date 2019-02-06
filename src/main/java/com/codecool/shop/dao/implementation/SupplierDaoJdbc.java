@@ -21,7 +21,7 @@ public class SupplierDaoJdbc extends DaoJdbc implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) {
-        String query = "INSERT INTO product_cat(name, description) VALUES(?, ?)";
+        String query = "INSERT INTO suppliers(name, description) VALUES(?, ?)";
         try (Connection connection = getConnection()
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -92,5 +92,17 @@ public class SupplierDaoJdbc extends DaoJdbc implements SupplierDao {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public void removeAll() {
+        String query = "DELETE FROM suppliers";
+        try (Connection connection = getConnection()
+        ){
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -24,7 +24,7 @@ import java.util.*;
 public class ProductController extends HttpServlet {
     private ProductDao productDataStore = ProductDaoMem.getInstance();
     private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
-    private SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    private SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
     private ShoppingCartSessionMap shoppingCartSessionMap = ShoppingCartSessionMap.getInstance();
     private ShoppingCartDaoMem shoppingCartDaoMem;
 

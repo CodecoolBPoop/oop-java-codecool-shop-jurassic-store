@@ -22,6 +22,7 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
 
         //setting up a new supplier
+        ((SupplierDaoJdbc) supplierDataStore).removeAll();
         Supplier bayer = new Supplier("Bayer", "Bayer AG is a German multinational pharmaceutical and life sciences company and one of the largest pharmaceutical companies in the world.");
         supplierDataStore.add(bayer);
         Supplier monsanto = new Supplier("Monsanto", "The Monsanto Company was an American agrochemical and agricultural biotechnology corporation.");
