@@ -61,15 +61,7 @@ public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDa
     @Override
     public void remove(int id) {
         String query = "DELETE FROM product_cat WHERE id = ?";
-        try (Connection connection = getConnection()
-        ){
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        remove(query, id);
     }
 
     public void removeAll() {
