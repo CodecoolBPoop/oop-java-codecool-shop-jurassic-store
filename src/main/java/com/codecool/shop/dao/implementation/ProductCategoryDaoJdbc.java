@@ -73,7 +73,7 @@ public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDa
     }
 
     public void removeAll() {
-        String query = "DELETE FROM product_cat";
+        String query = "DELETE FROM product_cat; ALTER SEQUENCE product_cat_id_seq START WITH 1; ALTER SEQUENCE product_cat_id_seq RESTART WITH 1;";
         try (Connection connection = getConnection()
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
