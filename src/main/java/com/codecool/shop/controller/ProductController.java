@@ -22,7 +22,7 @@ import java.util.*;
 
 @WebServlet(urlPatterns = {"/", "/filter"})
 public class ProductController extends HttpServlet {
-    private ProductDao productDataStore = ProductDaoMem.getInstance();
+    private ProductDao productDataStore = ProductDaoJdbc.getInstance();
     private ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
     private SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
     private ShoppingCartSessionMap shoppingCartSessionMap = ShoppingCartSessionMap.getInstance();

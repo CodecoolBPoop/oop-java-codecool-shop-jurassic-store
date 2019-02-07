@@ -17,24 +17,30 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+/*        ProductDao productDataStore = ProductDaoJdbc.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
         SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
 
         //setting up a new supplier
         ((SupplierDaoJdbc) supplierDataStore).removeAll();
         Supplier bayer = new Supplier("Bayer", "Bayer AG is a German multinational pharmaceutical and life sciences company and one of the largest pharmaceutical companies in the world.");
+        bayer.setId(1);
         supplierDataStore.add(bayer);
         Supplier monsanto = new Supplier("Monsanto", "The Monsanto Company was an American agrochemical and agricultural biotechnology corporation.");
+        monsanto.setId(2);
         supplierDataStore.add(monsanto);
         Supplier dow = new Supplier("Dow", "The Dow Chemical Company, commonly referred to as Dow, is an American multinational chemical corporation headquartered in Midland, Michigan, United States, and the predecessor of the merged company DowDuPont.");
+        dow.setId(3);
         supplierDataStore.add(dow);
 
         //setting up a new product category
         ((ProductCategoryDaoJdbc) productCategoryDataStore).removeAll();
         ProductCategory herbivorous = new ProductCategory("Herbivorous", "Dinosaur", "Vegan");
+        herbivorous.setId(1);
         ProductCategory carnivorous = new ProductCategory("Carnivorous", "Dinosaur", "Not vegan");
+        carnivorous.setId(2);
         ProductCategory omnivorous = new ProductCategory("Omnivorous", "Dinosaur", "Not that vegan");
+        omnivorous.setId(3);
         productCategoryDataStore.add(herbivorous);
         productCategoryDataStore.add(carnivorous);
         productCategoryDataStore.add(omnivorous);
@@ -48,6 +54,6 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Giganotosaurus (Bayer, carnivorous)",139,"USD","Giganotosaurus was one of the largest meat-eating dinosaurs. It roamed modern-day Argentina during the late Cretaceous Period, about 99.6 to 97 million years ago.", carnivorous, bayer));
         productDataStore.add(new Product("Caudipteryx (Dow, omnivorous)",200,"USD","Caudipteryx is a genus of peacock-sized theropod dinosaurs that lived in the Aptian age of the early Cretaceous Period (about 124.6 million years ago). They were feathered and remarkably birdlike in their overall appearance.", omnivorous, dow));
         productDataStore.add(new Product("Gargoyleosaurus (Dow, herbivorous)", 690, "USD", "Gargoyleosaurus is one of the earliest ankylosaurs known from reasonably complete fossil remains. Its skull measures 29 centimetres in length, and its total body length is an estimated 3 to 4 metres. It may have weighed as much as 1 tonne.", herbivorous, dow));
-        productDataStore.add(new Product("Triceratops (Monsanto, herbivorous)", 749, "USD", "Triceratops was a very common dinosaur which lived at the very end of the Cretaceous period. It had a huge frilled head with horns over each eye that could reach over 4 feet long. Triceratops had a third, smaller horn on its nose. These would be fearsome weapons against a predator.", herbivorous, monsanto));
+        productDataStore.add(new Product("Triceratops (Monsanto, herbivorous)", 749, "USD", "Triceratops was a very common dinosaur which lived at the very end of the Cretaceous period. It had a huge frilled head with horns over each eye that could reach over 4 feet long. Triceratops had a third, smaller horn on its nose. These would be fearsome weapons against a predator.", herbivorous, monsanto));*/
     }
 }

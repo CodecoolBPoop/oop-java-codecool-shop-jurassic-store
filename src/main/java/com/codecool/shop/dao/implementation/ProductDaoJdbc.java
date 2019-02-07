@@ -77,10 +77,10 @@ public class ProductDaoJdbc extends DaoJdbc implements ProductDao {
         ){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            preparedStatement.close();
             while(resultSet.next()){
                 result.add(productFactory(resultSet));
             }
+            preparedStatement.close();
         } catch (Exception e){
             e.printStackTrace();
         }
