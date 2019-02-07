@@ -28,7 +28,7 @@ public class EmailController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String city = request.getParameter("city");
-        String state = reques.getParameter("state");
+        String state = request.getParameter("state");
         String zip = request.getParameter("zip");
 
 
